@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>SAIC Test</title>
+    <style>
+        .row {
+            margin-bottom: 25px;
+        }
+
+        .col {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .col p {
+            font-size: 10px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        img.success-border {
+            border: 10px solid #090;
+        }
+
+        img.error-border {
+            border: 10px solid #900;
+        }
+
+        .btn-container button {
+            font-size: 10px;
+        }
+
+        .similarity-score {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            width: px;
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000;
+            visibility: hidden;
+        }
+
+        /* Spinner styles */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: inherit;
+            z-index: 99999;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            font-size: 10px;
+            position: absolute;
+            left: calc(50vw - 25px);
+            top: calc(50vh - 20px);
+        }
+
+        .spinner>div {
+            z-index: 999;
+            background-color: #090;
+            height: 100%;
+            width: 6px;
+            display: inline-block;
+            -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        }
+
+        .spinner .rect2 {
+            -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s;
+        }
+
+        .spinner .rect3 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+        }
+
+        .spinner .rect4 {
+            -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s;
+        }
+
+        .spinner .rect5 {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+        }
+
+        @-webkit-keyframes sk-stretchdelay {
+
+            0%,
+            40%,
+            100% {
+                -webkit-transform: scaleY(0.4)
+            }
+
+            20% {
+                -webkit-transform: scaleY(1.0)
+            }
+        }
+
+        @keyframes sk-stretchdelay {
+
+            0%,
+            40%,
+            100% {
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }
+
+            20% {
+                transform: scaleY(1.0);
+                -webkit-transform: scaleY(1.0);
+            }
+        }
+
+        @-webkit-keyframes rotation {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(359deg);
+            }
+        }
+
+        @-moz-keyframes rotation {
+            from {
+                -moz-transform: rotate(0deg);
+            }
+
+            to {
+                -moz-transform: rotate(359deg);
+            }
+        }
+
+        @-o-keyframes rotation {
+            from {
+                -o-transform: rotate(0deg);
+            }
+
+            to {
+                -o-transform: rotate(359deg);
+            }
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(359deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" style="display: none;">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>SAIC Code Test</h1>
+        <pre id="info"></pre>
+        <div class="row">
+            <div class="col col-md-4">
+                <img class="img-fluid" data-img-name="S223-01-t10_01.png"
+                    src="https://saicbucket.s3-us-west-1.amazonaws.com/S223-01-t10_01.png" />
+                <br>
+                <p>S223-01-t10_01.png</p>
+                <div class="similarity-score">
+                    <b>Score:</b>
+                </div>
+                <div class="templateId"></div>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-warning btn-create-template">Create Template</button>
+                    <button type="button" class="btn btn-success btn-compare-list">Compare Faces</button>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <img class="img-fluid" data-img-name="S223-03-t10_01.png"
+                    src="https://saicbucket.s3-us-west-1.amazonaws.com/S223-03-t10_01.png" />
+                <br>
+                <p>S223-01-t10_01.png</p>
+                <div class="similarity-score">
+                    <b>Score:</b>
+                </div>
+                <div class="templateId"></div>
+                <div class="btn-container">
+                    <button style="font-size: 10px!important;" class="btn btn-warning btn-create-template">Create
+                        Template</button>
+                    <button style="font-size: 10px!important;" class="btn btn-success btn-compare-list">Compare
+                        Faces</button>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <img class="img-fluid" data-img-name="S309-04-t10_01.png"
+                    src="https://saicbucket.s3-us-west-1.amazonaws.com/S309-04-t10_01.png" />
+                <br>
+                <p>S309-04-t10_01.png</p>
+                <div class="similarity-score">
+                    <b>Score:</b>
+                </div>
+                <div class="templateId"></div>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-warning btn-create-template">Create Template</button>
+                    <button type="button" class="btn btn-success btn-compare-list">Compare Faces</button>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <img class="img-fluid" data-img-name="S309-05-t10_01.png"
+                    src="https://saicbucket.s3-us-west-1.amazonaws.com/S309-05-t10_01.png" />
+                <br>
+                <p>S309-05-t10_01.png</p>
+                <div class="similarity-score">
+                    <b>Score:</b>
+                </div>
+                <div class="templateId"></div>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-warning btn-create-template">Create Template</button>
+                    <button type="button" class="btn btn-success btn-compare-list">Compare Faces</button>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <img class="img-fluid" data-img-name="S324-01-t10_01.png"
+                    src="https://saicbucket.s3-us-west-1.amazonaws.com/S324-01-t10_01.png" />
+                <br>
+                <p>S324-01-t10_01.png</p>
+                <div class="similarity-score">
+                    <b>Score:</b>
+                </div>
+                <div class="templateId"></div>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-warning btn-create-template">Create Template</button>
+                    <button type="button" class="btn btn-success btn-compare-list">Compare Faces</button>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <img class="img-fluid" data-img-name="S324-02-t10_01.png"
+                    src="https://saicbucket.s3-us-west-1.amazonaws.com/S324-02-t10_01.png" />
+                <br>
+                <p>S324-02-t10_01.png</p>
+                <div class="similarity-score">
+                    <b>Score:</b>
+                </div>
+                <div class="templateId"></div>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-warning btn-create-template">Create Template</button>
+                    <button type="button" class="btn btn-success btn-compare-list">Compare Faces</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        let data = null;
+
+
+
+        async function toDataURL(src, callback, outputFormat) {
+            var img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.onload = function () {
+                var canvas = document.createElement('CANVAS');
+                var ctx = canvas.getContext('2d');
+                var dataURL;
+                canvas.height = this.naturalHeight;
+                canvas.width = this.naturalWidth;
+                ctx.drawImage(this, 0, 0);
+                dataURL = canvas.toDataURL(outputFormat);
+                callback(dataURL);
+            };
+            img.src = src;
+            if (img.complete || img.complete === undefined) {
+                img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+                img.src = src;
+            }
+        }
+
+        function getInfo() {
+            const url = 'https://d9jnwmrhwc.execute-api.us-west-1.amazonaws.com/Production/v1/info'
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                crossDomain: true,
+                dataType: 'json',
+                headers: {
+                    'x-api-key': 'dKggXvB6wv3Y35puqkMNL6t2JazoDUSmaCW6hK0j'
+                },
+                success: (res) => {
+                    console.log('GET INFO SUCCESS', res);
+                    $('#info').html(JSON.stringify(JSON.parse(res.body), null, 4));
+                },
+                error: (err) => {
+                    console.log('GET INFO ERR', err);
+                }
+            });
+        }
+        getInfo();
+
+        function compareList(base64ImageString) {
+            const url = 'https://d9jnwmrhwc.execute-api.us-west-1.amazonaws.com/Production/v1/compare-list'
+
+            $('#loading').show();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify({ 'ImageData': base64ImageString }),
+                contentType: 'application/json',
+                crossDomain: true,
+                dataType: 'json',
+                headers: {
+                    'x-api-key': 'dKggXvB6wv3Y35puqkMNL6t2JazoDUSmaCW6hK0j'
+                },
+                success: (res) => {
+                    $('#loading').hide();
+
+                    const dataResponse = JSON.parse(res.body);
+                    console.log('dataResponse', dataResponse);
+
+                    const { compareFacesResults } = dataResponse.data;
+
+                    const compareFacesResultsMatches = compareFacesResults.filter(item => item.FaceMatches.length > 0).map(i => i.targetImageName);
+
+                    const similarityResults = compareFacesResults.filter(item => item.FaceMatches.length > 0).map((item) => {
+                        const { targetImageName, FaceMatches } = item;
+                        const similarity = FaceMatches[0].Similarity
+                        return {
+                            targetImageName,
+                            similarity
+                        };
+                    });
+
+                    console.log(similarityResults);
+
+                    $('img').each(function (index, elem) {
+
+                        const dataAttrImageName = $(this).data('img-name');
+
+                        const $scoreContainer = $(this).parent().find('.similarity-score');
+                        $scoreContainer.html('');
+                        $scoreContainer.css('visibility', 'visible');
+
+                        console.log(compareFacesResultsMatches.includes(dataAttrImageName), compareFacesResultsMatches, dataAttrImageName)
+                        // add borders
+                        if (compareFacesResultsMatches.includes(dataAttrImageName)) {
+                            $(this).addClass('success-border');
+                            $(this).removeClass('error-border');
+                            // insert scores
+                            const similaryResultForPic = similarityResults.find(i => i.targetImageName === dataAttrImageName);
+                            $scoreContainer.html('<b>Score:</b> ' + similaryResultForPic.similarity)
+                        } else {
+                            $(this).removeClass('success-border');
+                            $(this).addClass('error-border');
+                        }
+
+
+                    });
+                },
+                error: (err) => {
+                    $('#loading').hide();
+                    console.log('ERROR', err);
+                }
+            });
+        }
+
+        function createTemplate(base64ImageString, filename) {
+            console.log('create-template')
+            const url = 'https://d9jnwmrhwc.execute-api.us-west-1.amazonaws.com/Production/v1/create-template'
+
+            $('#loading').show();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify({ 'ImageData': base64ImageString }),
+                contentType: 'application/json',
+                crossDomain: true,
+                dataType: 'json',
+                headers: {
+                    'x-api-key': 'dKggXvB6wv3Y35puqkMNL6t2JazoDUSmaCW6hK0j'
+                },
+                success: (res) => {
+                    $('#loading').hide();
+
+                    const dataResponse = JSON.parse(res.body);
+                    console.log('dataResponse', dataResponse);
+                    // const { indexFacesResults } = dataResponse.data;
+                    // console.log(indexFacesResults, filename)
+                    // console.log(indexFacesResults.filter(result => result.targetImageName === filename));
+                    // const result = indexFacesResults.filter(result => result.targetImageName === filename)[0];//.FaceRecords[0];
+                    // const faceRecord = result.FaceRecords[0];
+                    // console.log('@@@@@ faceRecord', faceRecord, faceRecord.Face.ExternalImageId);
+
+
+                    // console.log('@@@@@@@ ', $(".col").find(`[data-img-name='${faceRecord.Face.ExternalImageId}']`));
+                    // $('img').each(function (index, elem) {
+                    //     const dataAttrImageName = $(this).data('img-name');
+
+                    //     if (dataAttrImageName === faceRecord.Face.ExternalImageId) {
+                    //         $(this).parent().find('.templateId').text(faceRecord.Face.FaceId);
+                    //     }
+                    // });
+                },
+                error: (err) => {
+                    $('#loading').hide();
+                    console.log('ERROR', err);
+                }
+            });
+        }
+
+
+        $(document).ready(() => {
+
+            $('.btn-create-template').on('click', async function () {
+                const imageSrc = $(this).parent().parent().find('img').attr('src');
+                console.log('@@@', imageSrc.split('/'));
+                await toDataURL(imageSrc, function (dataUrl) {
+
+                    base64ImageString = dataUrl.split('data:image/png;base64,')[1];
+                    const filename = imageSrc.split('/')[3];
+                    createTemplate(base64ImageString, filename);
+                });
+            });
+
+            $('.btn-compare-list').on('click', async function () {
+                const imageSrc = $(this).parent().parent().find('img').attr('src');
+                await toDataURL(imageSrc, function (dataUrl) {
+                    base64ImageString = dataUrl.split('data:image/png;base64,')[1];
+
+                    compareList(base64ImageString);
+                });
+            });
+
+        }) 
+    </script>
+</body>
+
+</html>

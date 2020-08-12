@@ -420,22 +420,6 @@
 
                     const dataResponse = JSON.parse(res.body);
                     console.log('dataResponse', dataResponse);
-                    // const { indexFacesResults } = dataResponse.data;
-                    // console.log(indexFacesResults, filename)
-                    // console.log(indexFacesResults.filter(result => result.targetImageName === filename));
-                    // const result = indexFacesResults.filter(result => result.targetImageName === filename)[0];//.FaceRecords[0];
-                    // const faceRecord = result.FaceRecords[0];
-                    // console.log('@@@@@ faceRecord', faceRecord, faceRecord.Face.ExternalImageId);
-
-
-                    // console.log('@@@@@@@ ', $(".col").find(`[data-img-name='${faceRecord.Face.ExternalImageId}']`));
-                    // $('img').each(function (index, elem) {
-                    //     const dataAttrImageName = $(this).data('img-name');
-
-                    //     if (dataAttrImageName === faceRecord.Face.ExternalImageId) {
-                    //         $(this).parent().find('.templateId').text(faceRecord.Face.FaceId);
-                    //     }
-                    // });
                 },
                 error: (err) => {
                     $('#loading').hide();
